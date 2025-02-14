@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Cards with Images</title>
+    <link rel="stylesheet" href="/base.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+    <div class="main">
+        <h2> Projects </h2>
+        <hr />
+
+    </div>
+    <div class="container" id="cardContainer">
+        
+    </div>
+   
+    <script>
+        async function fetchCards() {
+            const response = await fetch("/cards");
+            const cards = await response.json();
+            const container = document.getElementById("cardContainer");
+
+            cards.forEach(card => {
+                const cardElement = document.createElement("div");
+                cardElement.classList.add("card");
+                cardElement.id = card.id;
+                cardElement.innerHTML = `
+                    <img src="${card.image}" alt="${card.title}">
+                    <div class="card-content">
+                    <h3>${card.title}</h3>
+                    <p>${card.description}</p>
+                    </div>
+                <div class="project-links">
+        <button type="submit"><a href="${card.email_link}" target="_blank">
+        <i class="fa fa-envelope-o" style="font-size:36px"></i> </a></button>
+        <button type="submit"><a href="${card.web_link}" target="_blank"><i class="fa fa-globe" style="font-size:36px"></i></a></button>
+
+    <button type="submit"><a href="${card.github_link}"target="_blank">
+        <i class="fa fa-github" style="font-size:36px"></i></a></button>
+    </div>
+                    `;
+                container.appendChild(cardElement);
+            });
+        }
+
+        function changeColor(cardId) {
+            document.getElementById(cardId).style.backgroundColor = "#ffcc00";
+        }
+
+        fetchCards(); 
+    </script>
+</body>
+</html>
