@@ -20,16 +20,19 @@ body {
 }
   .card {
     width: 300px;
-    box-shadow: 5px 5px 10px  rgb(187, 187, 187);
 
     padding: 20px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    background-color: white;
+    background-color: rgb(248, 248, 248);
     border: 1px solid #bebebe;
     gap: 25px;
     margin: 20px;
     border-radius: 8px;
     line-height: 0.8;
+    transition: transform 0.3s ease;
+}
+.card:hover{
+  transform: translateY(-4px);
 }
 
 .card-content h2{
